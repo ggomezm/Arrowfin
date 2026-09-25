@@ -1,0 +1,61 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Broker {
+  id       String   @id @default(uuid())
+  name     String
+  traders  Trader[]
+}
+
+model Trader {
+  id        String   @id @default(uuid())
+  brokerId  String
+  broker    Broker   @relation(fields: [brokerId], references: [id])
+  accounts  Account[]
+
+  @@index([brokerId], name: "index_trader_broker")
+}
+
+model Account {
+  id        String   @id @default(uuid())
+  traderId  String
+  trader    Trader   @relation(fields: [traderId], references: [id])
+  balance   Float
+  fills     Fill[]
+}
+
+model Instrument {
+  id        String   @id @default(uuid())
+  symbol    String   @unique
+  fills     Fill[]
+}
+
+model Fill {
+  id            String     @id @default(uuid())
+  accountId     String
+  account       Account    @relation(fields: [accountId], references: [id])
+  instrumentId  String
+  instrument    Instrument @relation(fields: [instrumentId], references: [id])
+  qty           Int
+  price         Float
+  commissionUsd Float
+  filledAt      DateTime
+
+  @@index([accountId, filledAt], name: "index_fill_account")
+}
+
+model Snapshot {
+  id        Int      @id @default(autoincrement())
+  traderId  String
+  brokerId  String
+  createdAt DateTime @default(now())
+  data      Json
+} 

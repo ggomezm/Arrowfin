@@ -427,3 +427,11 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+BackEnd/.agents/skills/prisma-composer-core-concepts/SKILL.md
+BackEnd/.agents/skills/prisma-platform-core-concepts/SKILL.md
+BackEnd/.claude/skills/prisma-composer-core-concepts/SKILL.md
+BackEnd/.claude/skills/prisma-platform-core-concepts/SKILL.md
+BackEnd/.cursor/skills/prisma-composer-core-concepts/SKILL.md
+BackEnd/.cursor/skills/prisma-platform-core-concepts/SKILL.md
+BackEnd/.devin/skills/prisma-composer-core-concepts/SKILL.md
+BackEnd/.devin/skills/prisma-platform-core-concepts/SKILL.md
